@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# tws: tiny/small i3 status
+# replacement
+
+address_v4() {
+	echo $(ip addr show $1|head -n3|tac|head -n1|cut -d't' -f2|cut -d'b' -f1|cut -d' ' -f2|cut -d'/' -f1)
+}
+
+while :; do
+	# columns (add as you please)
+	ACTIVE_INT=$(ip token | cut -d'v' -f 2 | cut -c2-)
+	IPV4=$(address_v4 ${ACTIVE_INT})
+	DTIME=$(date +"%x %I:%M:%S%P")
+	LAVG=$(uptime|cut -d':' -f5|cut -c2-|cut -d',' -f1)	
+
+	# 0 is dev node
+	# 1 is used space
+	# 2 is free space
+	IFS=',' read -r -a disk <<< "$(df -h --output=source,used,avail /|tac|head -n1|tr -s " "|sed 's/ /,/g')"
+
+	# output column
+	echo "net ${ACTIVE_INT} : ${IPV4} | la: ${LAVG} | disk: ${disk[0]} used ${disk[1]} free ${disk[2]} | date: ${DTIME}"
+	sleep 5;
+done
+
+
+

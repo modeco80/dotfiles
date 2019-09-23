@@ -1,0 +1,42 @@
+
+#!/bin/bash
+
+# ssc: Scrot-based tool to take screenshots
+# 2019 modeco80
+
+# all types supported
+TYPES=(
+ fullscreen
+ selection
+ focused-window
+);
+
+if [ ! -d "$HOME/screenshots" ]; then
+	echo "Warning: Created screenshot directory";
+	mkdir $HOME/screenshots;
+fi
+
+if [ "$1" == "" ]; then
+	echo "No type provided, spawning UI";
+	TYPE="$(zenity --list --text=screenshot --column=e --hide-header --title='Ssc UI' --text='Select a screenshot option from the below options.' ${TYPES[*]})";
+else
+	if [ "$1" == "--help" ]; then
+		echo "ssc : Scrot wrapper";
+		echo "Usage: ssc [Blank or (${TYPES[*]})]";
+		echo "Blank will initiate UI";
+	fi
+	TYPE=$1;
+fi
+
+case $TYPE in
+	${TYPES[0]})
+		scrot -z -e 'mv $f ~/screenshots';
+	;;
+	${TYPES[1]})
+		scrot -s -z -e 'mv $f ~/screenshots';
+	;;
+	${TYPES[2]})
+		scrot -d 1 -u -s -z -e 'mv $f ~/screenshots';
+	;;
+	*)
+esac
