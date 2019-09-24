@@ -26,6 +26,6 @@ wget() {
 	curl -LO $1
 }
 
-PATH="$HOME/bin:${PATH}"
+PATH="$HOME/bin:$HOME/bin/dotnet:${PATH}"
 
 PS1='\u@\h \w\$ '
