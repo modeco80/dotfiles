@@ -18,9 +18,12 @@ fetchshot() {
 	ssc fullscreen;
 }
 
-# cd to projects/*
-proj() {
-	cd ~/Projects/$*
+unzip() {
+	bsdtar xvf $1
+}
+
+wget() {
+	curl -LO $1
 }
 
 PATH="$HOME/bin:${PATH}"
