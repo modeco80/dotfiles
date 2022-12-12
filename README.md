@@ -1,13 +1,9 @@
 ## dotfiles
 
-wahoo
+wahoo (2022 edition)
 
 ## how to install
 
-`./ins-arch.sh`
+`./sync.sh` will install everything into your home directory
 
-then
-
-`./sync.sh`
-
-after that log out, log back in, then startx and enjoy
+relog and it should be good to go.

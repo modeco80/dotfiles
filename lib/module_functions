@@ -1,0 +1,8 @@
+#!/bin/bash
+
+dotf_expose_module() {
+	local name="$1"
+	#local developer="$2"
+	
+	export DOTF_LOADED_MODULES="$name:$DOTF_LOADED_MODULES"
+}

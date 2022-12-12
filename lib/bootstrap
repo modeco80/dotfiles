@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# dotf bootstrap.
+# Loads all modules.
+
+# Load all dotf modules
+_dotf_bs_load() {
+	# this file is normally unused.
+	. $HOME/.dotf/module_functions
+
+	for shfile in $HOME/.dotf/modules/*.sh; do
+		local file_permission="$(stat -c%a $shfile)";
+
+		case $file_permission in
+			# These permission don't allow execution
+			# of things arbitarly, and do not allow other write.
+			"600"|"640"|"644")
+				. $shfile
+			;;
+			
+			*)
+				# Reject any module files with insecure file permissions.
+		
+				echo "dotf WARNING!: Not loading \"$shfile\"";
+				echo "as it has insecure access rights of \"$file_permission\".";
+				echo "One way to fix this (not the best) is to run \"chmod 644 $shfile\" or \"chmod -Rv 644 $HOME/.dotf/*\"";
+			;;
+		esac
+
+	done
+}
+
+alias dotf_reload="_dotf_bs_load"
