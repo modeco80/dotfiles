@@ -27,15 +27,15 @@ copy_recursively_ensuring() {
     };
 
     echo "copying directory $1"
-    cp -rv $1 $2
+    cp -rv $1/* $2
 }
 
 copy_ensuring bashrc $PREFIX/.bashrc
 copy_ensuring bashrc $PREFIX/.bashrc
 
-copy_recursively_ensuring config/ $PREFIX/.config
-copy_recursively_ensuring lib/ $PREFIX/.dotf
-copy_recursively_ensuring bin/ $PREFIX/.local/bin
+copy_recursively_ensuring config $PREFIX/.config
+copy_recursively_ensuring lib $PREFIX/.dotf
+copy_recursively_ensuring bin $PREFIX/.local/bin
 
 copy_ensuring bg.jpg $PREFIX
 copy_ensuring face.png $PREFIX
