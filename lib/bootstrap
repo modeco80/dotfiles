@@ -20,7 +20,6 @@ _dotf_bs_load() {
 			
 			*)
 				# Reject any module files with insecure file permissions.
-		
 				echo "dotf WARNING!: Not loading \"$shfile\"";
 				echo "as it has insecure access rights of \"$file_permission\".";
 				echo "One way to fix this (not the best) is to run \"chmod 644 $shfile\" or \"chmod -Rv 644 $HOME/.dotf/*\"";
